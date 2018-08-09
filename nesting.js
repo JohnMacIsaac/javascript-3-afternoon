@@ -51,18 +51,31 @@ var employees = [
 */
 
 //Code Here
+// function employeeUpdater() {
+//   return employees.map(function(elem, i) {
+//     if(elem.firstName === "Theo") { delete elem; }
+//     if(elem.firstName === "Lorie") { elem.department = 'HR'; }
+//   });
+// } 
 function employeeUpdater() {
-  employees.map(function())
-}
-
+  for (var i = 0; i < employees.length; i++) {
+    if (employees[i].firstName === "Lorie") {
+      employees[i].department = "HR";
+    }  
+  }
+  for (var i = 0; i < employees.length; i++) {
+    if (employees[i].firstName === "Theo") {
+      employees.splice(i,1);
+    }  
+  }
+  return employees;
+} 
 
 
 ////////// PROBLEM 2 //////////
-
 // Do not edit the code below.
 var workplaceAccidents = [12, 56, 44, 3, 29, 56, 56, 3, 7, 12];
 // Do not edit the code above.
-
 /*
   The array above represents IDs tied to reported workplace accidents. 
   An employee accidentally entered in duplicates to array, making it look as though there are more accidents this year than there actually are.
@@ -70,13 +83,20 @@ var workplaceAccidents = [12, 56, 44, 3, 29, 56, 56, 3, 7, 12];
     2. Use nested for loops to check for duplicate numbers, and then remove the duplicates from the array.
     3. Return the updated array.
 */
-
 //Code Here
-
-
+function removeDuplicates(arr) {
+  for(var i = 0; i < arr.length; i++) {
+    for(var j = i+1; j < arr.length; j++) {
+      if (arr[i] === arr[j]) {
+        arr.splice(j,1);
+        i--;
+      }
+    }
+  }
+  return arr;
+}
 
 ////////// PROBLEM 3 //////////
-
 // Do not edit the code below.
 var cat = {
   name: 'Fluffy',
@@ -92,16 +112,14 @@ var cat = {
   ]
 }
 // Do not edit the code above.
-
 /*
   Fluffy has two friends, Grumpy and Lazy Bones. 
     1. Assign the value of Grumpy's 2nd activity to the grumpyActivity variable below.
     2. Assign fluffy2ndFriend the name of Fluffy's 2nd friend.
 */
-
 //Code Here
-var grumpyActivity;
-var fluffy2ndFriend;
+var grumpyActivity = cat.catFriends[0].activities[1]; 
+var fluffy2ndFriend = cat.catFriends[1].name;
 
 
 
@@ -131,7 +149,6 @@ var myCar = {
   ]
 }
 // Do not edit the code above.
-
 /*
   Above is some information about my car. As you can see, I am not the best driver.
   I have caused a few accidents.
@@ -140,9 +157,14 @@ var myCar = {
     2. Loop over the accidents array.
     3. Change atFaultForAccident from true to false.
 */
-
 //Code Here
-
+function recordCleaner() {
+  var arr = myCar.accidents;
+  for (var i = 0; i < arr.length; i++ ) {
+    arr[i].atFaultForAccident = false;
+  }
+  return arr;
+}
 
 
 ////////// PROBLEM 5 //////////
@@ -161,5 +183,31 @@ var numsArr = [ [1, 2, 3, 4], [5, 6], [7, 8, 9, 10, 11]];
 */
 
 //Code Here
+// function looper() {
+//   for(var i = 0; i < numsArr.length; i++) {
+//     for(var j = 0; j < numsArr[i]; j++) {
+//       if(numsArr[i][j] % 2 === 0) {
+//         numsArr[i][j] = 'even';
+//       } else {
+//         numsArr[i][j] = 'odd';
+//       }
+//       // } else if ( numsArr[i][j] % 2 !== 0) {
+//       //   numsArr[i][j] = 'odd';
+//       // }
+//     }
+//   }
+//   return numsArr;
+// }
 
 
+function looper() {
+  return numsArr.map(elem => {
+    return (elem.map(e => {
+      if (e % 2 === 0) { 
+        return 'even' 
+      } else { 
+        return 'odd' 
+      }
+    }))
+  })
+};
